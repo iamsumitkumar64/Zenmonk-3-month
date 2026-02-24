@@ -1,0 +1,7 @@
+Helpful docs -> 
+
+Google Auth -> https://dev.to/chukwutosin_/implement-google-oauth-in-nestjs-using-passport-1j3k
+noted written error in docs -> in this parameter in while fetching profile request also include => async validate()
+
+
+FaceBook Auth -> https://dev.to/elishaking/how-to-implement-facebook-login-with-nestjs-90h
