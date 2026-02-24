@@ -16,7 +16,7 @@ export class RegisterService {
         //check if already exists using this email
         const isUserExists = await this.userRepo.findByEmail(body.email);
         if (isUserExists.length) {
-            return "User Already Exists with this Email"
+            return { message: "User Already Exists with this Email" }
         }
 
         //hashed password using bcrypt
@@ -24,6 +24,6 @@ export class RegisterService {
 
         //register user in DB
         await this.userRepo.register(body);
-        return "Registered User"
+        return { message: "Registered User" }
     }
 }

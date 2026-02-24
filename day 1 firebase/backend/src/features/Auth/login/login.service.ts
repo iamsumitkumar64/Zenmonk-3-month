@@ -16,14 +16,14 @@ export class LoginService {
         //check if already exists using this email
         const isUserExists = await this.userRepo.findByEmail(body.email);
         if (!isUserExists) {
-            return "User not Exists with this Email"
+            return { message: "User not Exists with this Email" }
         }
 
-console.log(isUserExists,body.password, isUserExists[0].password);
+        console.log(isUserExists, body.password, isUserExists[0].password);
         //verify using password of bcrypt in DB
         const isValid = await this.bcryptService.verifyPassword(body.password, isUserExists[0].password);
-        if(!isValid){
-            return "Password not matched or modified"
+        if (!isValid) {
+            return { message: "Password not matched or modified" }
         }
 
         // generate token for accessing resources

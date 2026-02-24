@@ -13,9 +13,9 @@ export default function LoginComp() {
 
     const onSubmit = async (data: any) => {
         console.log('Login Form Data =>', data);
-        const response = await ApiCallService(`http://localhost:9000/login`, 'POST', '', data);
+        const response = await ApiCallService(`http://localhost:9000/login`, 'POST', {}, data);
         console.log('Login Response =>', response);
-        if (response) {
+        if (response.access_token) {
             localStorage.setItem('token', response.access_token)
             enqueueSnackbar('Login Success');
         }
@@ -28,17 +28,6 @@ export default function LoginComp() {
         <div className='main'>
             <h1>Login Form</h1>
             <form onSubmit={handleSubmit(onSubmit)} className='form'>
-                {/* Username Field*/}
-                <div>
-                    <label>Username</label>
-                    <input
-                        type="text"
-                        {...register("username", {
-                            required: "Username is required."
-                        })}
-                    />
-                    {errors.username && (<p>{errors.root?.message}</p>)}
-                </div>
                 {/* Email Field*/}
                 <div>
                     <label>Email</label>
@@ -67,6 +56,7 @@ export default function LoginComp() {
                             }
                         })}
                     />
+                    {errors.root?.message}
                     {errors.password && (<p>{errors.root?.message}</p>)}
                 </div>
                 {/* Submit Button*/}

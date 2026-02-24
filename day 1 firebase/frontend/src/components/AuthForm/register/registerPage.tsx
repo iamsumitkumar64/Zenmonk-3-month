@@ -13,20 +13,26 @@ export default function RegisterComp() {
 
     const onSubmit = async (data: any) => {
         console.log('Register Form Data =>', data);
-        const response = await ApiCallService(`http://localhost:9000/register`, 'POST', '', data);
+        const response = await ApiCallService(`http://localhost:9000/register`, 'POST', {}, data);
         console.log('Register Response =>', response);
-        if (response) {
-            enqueueSnackbar('Register Success');
-        }
-        else {
-            enqueueSnackbar(response.error);
-        }
+        enqueueSnackbar(response.message);
     }
 
     return (
         <div className='main'>
             <h1>Register Form</h1>
             <form onSubmit={handleSubmit(onSubmit)} className='form'>
+                {/* Username Field*/}
+                <div>
+                    <label>Username</label>
+                    <input
+                        type="text"
+                        {...register("username", {
+                            required: "Username is required."
+                        })}
+                    />
+                    {errors.username && (<p>{errors.root?.message}</p>)}
+                </div>
                 {/* Email Field*/}
                 <div>
                     <label>Email</label>
