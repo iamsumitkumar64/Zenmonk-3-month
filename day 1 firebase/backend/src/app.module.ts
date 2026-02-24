@@ -15,6 +15,7 @@ import { GoogleStrategy } from './infrastructure/google-strategy/google.strategy
 import { GoogleController } from './features/Auth/google/google.controller.';
 import { BcryptService } from './infrastructure/services/bcrypt.service';
 import { AllActiveUserModule } from './features/users/active-users-list/active-user.module';
+import { AllActiveUserController } from './features/users/active-users-list/active-user.controller';
 
 @Module({
   imports: [
@@ -42,11 +43,12 @@ import { AllActiveUserModule } from './features/users/active-users-list/active-u
     AllActiveUserModule,
   ],
   controllers: [AppController, GoogleController],
-  providers: [AppService, AuthService, BcryptService, GoogleStrategy],
+  providers: [AppService, AuthService, BcryptService, UserRepository, GoogleStrategy],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(AuthenticateMiddleware)
+      .forRoutes(AllActiveUserController)
   }
 }

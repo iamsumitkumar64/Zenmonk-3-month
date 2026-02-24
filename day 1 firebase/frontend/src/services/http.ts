@@ -1,22 +1,26 @@
-const ApiCallService = async (url: string, method: string, headers: any, body: any) => {
-    // making http call to server
-    const requestHeaders = {
-        'Content-Type': 'application/json',
-        ...headers,
-    };
-
-    const response = await fetch(
-        url,
-        {
+const ApiCallService = async (url: string, method: string, token: string, body: any) => {
+    try {
+        const requestHeaders: HeadersInit = {
+            'Content-Type': 'application/json',
+            'Authorization': `${token}`
+        };
+        const config: RequestInit = {
             method: method,
-            body: JSON.stringify(body),
             headers: requestHeaders,
+        };
+        if (body && method != 'GET' && method !== 'HEAD') {
+            config.body = JSON.stringify(body);
         }
-    );
-    console.log("Api Response =>", response);
 
-    //returning response
-    return response.json();
+        const response = await fetch(url, config);
+        const result = await response.json();
+
+        console.log("Api Response =>", result);
+        return result;
+    } catch (err) {
+        console.log("Error in ApiService call: ", err);
+        return null;
+    }
 }
 
 export default ApiCallService;

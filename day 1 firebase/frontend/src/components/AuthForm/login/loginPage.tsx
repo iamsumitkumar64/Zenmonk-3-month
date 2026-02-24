@@ -12,7 +12,7 @@ export default function LoginComp() {
     const { enqueueSnackbar } = useSnackbar();
 
     const onSubmit = async (data: any) => {
-        const response = await ApiCallService(`${process.env.NEXT_PUBLIC_BACKEND_URL}/login`, 'POST', {}, data);
+        const response = await ApiCallService(`${process.env.NEXT_PUBLIC_BACKEND_URL}/login`, 'POST', '', data);
         if (response.access_token) {
             localStorage.setItem('token', response.access_token)
             enqueueSnackbar('Login Success');

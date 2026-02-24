@@ -12,7 +12,7 @@ export default function RegisterComp() {
     const { enqueueSnackbar } = useSnackbar();
 
     const onSubmit = async (data: any) => {
-        const response = await ApiCallService(`${process.env.NEXT_PUBLIC_BACKEND_URL}/register`, 'POST', {}, data);
+        const response = await ApiCallService(`${process.env.NEXT_PUBLIC_BACKEND_URL}/register`, 'POST', '', data);
         enqueueSnackbar(response.message);
     }
 
