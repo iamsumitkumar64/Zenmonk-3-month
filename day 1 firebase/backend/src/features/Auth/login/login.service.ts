@@ -19,7 +19,6 @@ export class LoginService {
             return { message: "User not Exists with this Email" }
         }
 
-        console.log(isUserExists, body.password, isUserExists[0].password);
         //verify using password of bcrypt in DB
         const isValid = await this.bcryptService.verifyPassword(body.password, isUserExists[0].password);
         if (!isValid) {

@@ -7,7 +7,6 @@ export class AuthService {
     constructor(private readonly jwtService: JwtService) { }
 
     async generateJwtToken(userObj: UserEntity) {
-        console.log(userObj);
         const payload = {
             sub: userObj.uuid,
             email: userObj.email,

@@ -12,15 +12,13 @@ export default function LoginComp() {
     const { enqueueSnackbar } = useSnackbar();
 
     const onSubmit = async (data: any) => {
-        console.log('Login Form Data =>', data);
-        const response = await ApiCallService(`http://localhost:9000/login`, 'POST', {}, data);
-        console.log('Login Response =>', response);
+        const response = await ApiCallService(`${process.env.NEXT_PUBLIC_BACKEND_URL}/login`, 'POST', {}, data);
         if (response.access_token) {
             localStorage.setItem('token', response.access_token)
             enqueueSnackbar('Login Success');
         }
         else {
-            enqueueSnackbar(response.error);
+            enqueueSnackbar(response.message);
         }
     }
 
@@ -51,8 +49,8 @@ export default function LoginComp() {
                         {...register("password", {
                             required: "Password is required.",
                             minLength: {
-                                value: 6,
-                                message: "Password should be at least 6 characters."
+                                value: 8,
+                                message: "Password should be at least 8 characters."
                             }
                         })}
                     />

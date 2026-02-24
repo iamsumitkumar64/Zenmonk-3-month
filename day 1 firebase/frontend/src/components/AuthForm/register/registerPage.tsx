@@ -12,9 +12,7 @@ export default function RegisterComp() {
     const { enqueueSnackbar } = useSnackbar();
 
     const onSubmit = async (data: any) => {
-        console.log('Register Form Data =>', data);
-        const response = await ApiCallService(`http://localhost:9000/register`, 'POST', {}, data);
-        console.log('Register Response =>', response);
+        const response = await ApiCallService(`${process.env.NEXT_PUBLIC_BACKEND_URL}/register`, 'POST', {}, data);
         enqueueSnackbar(response.message);
     }
 

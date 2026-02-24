@@ -13,6 +13,7 @@ const ApiCallService = async (url: string, method: string, headers: any, body: a
             headers: requestHeaders,
         }
     );
+    console.log("Api Response =>", response);
 
     //returning response
     return response.json();
