@@ -1,9 +1,11 @@
 "use client"
 
-export const RegisterComp = () => {
+import RegisterComp from "@/components/AuthForm/register/registerPage";
+
+export default function RegisterPage() {
     return (
-        <h1>Register COmpnent</h1>
+        <>
+            <RegisterComp />
+        </>
     )
 }
-
-export default RegisterComp;

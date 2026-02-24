@@ -1,9 +1,11 @@
 "use client"
 
-export const LoginComp = () => {
+import LoginComp from "@/components/AuthForm/login/loginPage";
+
+export default function LoginPage() {
     return (
-        <h1>Login COmpnent</h1>
+        <>
+            <LoginComp />
+        </>
     )
 }
-
-export default LoginComp;

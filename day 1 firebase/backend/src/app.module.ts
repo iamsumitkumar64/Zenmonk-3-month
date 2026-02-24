@@ -9,9 +9,16 @@ import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserRepository } from './infrastructure/repository/user.repo';
 import { AuthenticateMiddleware } from './infrastructure/middleware/authenticate.middleware';
+import { ConfigModule } from '@nestjs/config';
+import { PassportModule } from '@nestjs/passport';
+import { GoogleStrategy } from './infrastructure/google-strategy/google.strategy';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+
     TypeOrmModule.forRoot({
       ...dataSource.options,
       retryAttempts: 10,
@@ -20,16 +27,18 @@ import { AuthenticateMiddleware } from './infrastructure/middleware/authenticate
 
     JwtModule.register({
       global: true,
-      secret: "sumit123",
+      secret: process.env.JWT_REGISTER_SECRET,
       signOptions: { expiresIn: '60m' },
     }),
+
+    PassportModule,
 
     //Modules
     RegisterModule,
     LoginModule,
   ],
   controllers: [AppController],
-  providers: [AppService, AuthService, UserRepository],
+  providers: [AppService, AuthService, UserRepository, GoogleStrategy],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
