@@ -1,13 +1,15 @@
 import { UserRepository } from "src/infrastructure/repository/user.repo";
 import { RegisterDto } from "./register.dto";
 import { Injectable } from "@nestjs/common";
-import { AuthService } from "src/infrastructure/Auth/auth.service";
+import { AuthService } from "src/infrastructure/services/auth.service";
+import { BcryptService } from "src/infrastructure/services/bcrypt.service";
 
 @Injectable()
 export class RegisterService {
     constructor(
         private readonly userRepo: UserRepository,
-        private readonly authService: AuthService
+        private readonly authService: AuthService,
+        private readonly bcryptService: BcryptService
     ) { }
 
     async registerUser(body: RegisterDto) {
@@ -16,6 +18,9 @@ export class RegisterService {
         if (isUserExists.length) {
             return "User Already Exists with this Email"
         }
+
+        //hashed password using bcrypt
+        body.password = await this.bcryptService.hashPassword(body.password);
 
         //register user in DB
         await this.userRepo.register(body);

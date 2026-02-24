@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
-import { AuthService } from '../Auth/auth.service';
+import { AuthService } from '../services/auth.service';
 import { UserRepository } from '../repository/user.repo';
 
 @Injectable()
