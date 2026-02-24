@@ -12,6 +12,7 @@ import { AuthenticateMiddleware } from './infrastructure/middleware/authenticate
 import { ConfigModule } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
 import { GoogleStrategy } from './infrastructure/google-strategy/google.strategy';
+import { GoogleController } from './features/Auth/google/google.controller.';
 
 @Module({
   imports: [
@@ -37,8 +38,8 @@ import { GoogleStrategy } from './infrastructure/google-strategy/google.strategy
     RegisterModule,
     LoginModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, AuthService, UserRepository, GoogleStrategy],
+  controllers: [AppController,GoogleController],
+  providers: [AppService, AuthService, GoogleStrategy],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
