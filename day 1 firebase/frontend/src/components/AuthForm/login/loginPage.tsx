@@ -1,7 +1,7 @@
 import ApiCallService from '@/services/http';
 import { useSnackbar } from 'notistack';
 import { useForm } from 'react-hook-form';
-import './loginPage.css'
+import '../form-common.css'
 
 export default function LoginComp() {
     const {
