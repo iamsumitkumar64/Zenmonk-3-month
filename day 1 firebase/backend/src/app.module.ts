@@ -14,6 +14,7 @@ import { PassportModule } from '@nestjs/passport';
 import { GoogleStrategy } from './infrastructure/google-strategy/google.strategy';
 import { GoogleController } from './features/Auth/google/google.controller.';
 import { BcryptService } from './infrastructure/services/bcrypt.service';
+import { AllActiveUserModule } from './features/users/active-users-list/active-user.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { BcryptService } from './infrastructure/services/bcrypt.service';
     //Modules
     RegisterModule,
     LoginModule,
+    AllActiveUserModule,
   ],
   controllers: [AppController, GoogleController],
   providers: [AppService, AuthService, BcryptService, GoogleStrategy],

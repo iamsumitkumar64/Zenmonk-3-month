@@ -34,4 +34,18 @@ export class UserRepository extends Repository<UserEntity> {
         });
         return user;
     }
+
+    async fetchingAllUsers() {
+        const users = await this.find({
+            where: {
+                is_active: true
+            },
+            select: {
+                email: true,
+                username: true,
+                uuid: true
+            }
+        });
+        return users;
+    }
 }
