@@ -1,0 +1,25 @@
+.list {
+    width: 40%;
+    height: 98vh;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+    border-right: 1px solid black;
+    border-top-right-radius: 10%;
+    border-bottom-right-radius: 10%;
+}
+
+.list>ul {
+    overflow: scroll;
+    font-size: medium;
+    font-weight: 900;
+    margin-bottom: 20%;
+}
+
+.list>ul>li {
+    margin-bottom: 1%;
+    padding: 5%;
+    background-color: rgb(0, 162, 255);
+    color: white;
+}

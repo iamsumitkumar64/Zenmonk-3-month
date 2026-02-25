@@ -1,0 +1,10 @@
+.header {
+    width: 100%;
+    height: 20%;
+}
+
+.main>.body {
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+}
