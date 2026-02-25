@@ -67,7 +67,7 @@ export default function PlayerComp() {
                         />
                     </button>
                     <button onClick={togglePlay} className='.specificButton'>
-                        {isPlaying ? <Image
+                        {!isPlaying ? <Image
                             src="/play.png"
                             width={500}
                             height={500}
