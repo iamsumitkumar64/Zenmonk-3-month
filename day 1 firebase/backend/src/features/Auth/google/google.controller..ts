@@ -1,4 +1,4 @@
-import { Controller, Get, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, HttpStatus, Redirect, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('google')
@@ -10,8 +10,9 @@ export class GoogleController {
     async googleAuth(@Req() req) { }
 
     @Get('redirect')
+    @Redirect('https://docs.nestjs.com', HttpStatus.PERMANENT_REDIRECT)
     @UseGuards(AuthGuard('google'))
     googleAuthRedirect(@Req() req) {
-        return req.user;
+        console.log(req.user);
     }
 }
