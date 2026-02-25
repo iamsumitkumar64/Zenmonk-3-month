@@ -15,7 +15,7 @@ export const UploadForm = () => {
 
     const handleUpload = async () => {
         if (!file) {
-            enqueueSnackbar("Please select a file first", { variant: "success" });
+            enqueueSnackbar("Please select a file first", { variant: "warning" });
             return;
         }
 

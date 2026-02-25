@@ -21,6 +21,8 @@ export default function PlayerComp() {
         setImg(`https://picsum.photos/${random}/${random}.jpg`);
         setIsPlaying(false);
         enqueueSnackbar("Audio Selected =>" + audioUrl, { variant: "success" });
+        setcurrentTime(timeConversionUtil(100.493063));
+        setduration(timeConversionUtil(100.493063));
     }, [audioUrl]);
 
     const togglePlay = () => {
@@ -38,6 +40,7 @@ export default function PlayerComp() {
 
     if (!audioUrl) {
         enqueueSnackbar("No Audio right now =>" + audioUrl, { variant: "error" });
+        return "Select Song First";
     }
 
     const changeAudio = (url: string | null) => {
