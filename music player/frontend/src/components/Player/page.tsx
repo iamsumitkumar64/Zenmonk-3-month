@@ -4,6 +4,7 @@ import './player.css'
 import { useAudioPlayer } from '@/context/track';
 import { generateRandom3DigitNumber } from '@/utils/random';
 import { useSnackbar } from 'notistack';
+import Image from 'next/image';
 
 export default function PlayerComp() {
     const { audioUrl, nextTrack, prevTrack, setAudioUrl } = useAudioPlayer();
@@ -43,11 +44,35 @@ export default function PlayerComp() {
                 <audio ref={audioRef} src={'/uploads/' + audioUrl} />
                 <p>{audioUrl}</p>
                 <div className="controls">
-                    <button onClick={() => changeAudio(prevTrack)}>Prev</button>
-                    <button onClick={togglePlay}>
-                        {isPlaying ? 'Pause' : 'Play'}
+                    <button onClick={() => changeAudio(prevTrack)}>
+                        <Image
+                            src="/prev_track.png"
+                            width={500}
+                            height={500}
+                            alt="Picture of the author"
+                        />
                     </button>
-                    <button onClick={() => changeAudio(nextTrack)}>Next</button>
+                    <button onClick={togglePlay}>
+                        {isPlaying ? <Image
+                            src="/play.png"
+                            width={500}
+                            height={500}
+                            alt="Picture of the author"
+                        /> : <Image
+                            src="/pause.png"
+                            width={500}
+                            height={500}
+                            alt="Picture of the author"
+                        />}
+                    </button>
+                    <button onClick={() => changeAudio(nextTrack)}>
+                        <Image
+                            src="/next_track.png"
+                            width={500}
+                            height={500}
+                            alt="Picture of the author"
+                        />
+                    </button>
                 </div>
             </li>
         </div>

@@ -7,6 +7,7 @@ export default function Home() {
   return (
     <div className="main">
       <div className="header">
+        <h1>Music Player</h1>
         <UploadForm />
       </div>
       <div className="body">

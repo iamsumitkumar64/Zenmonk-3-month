@@ -1,8 +1,8 @@
 .uploadDiv {
-    padding: 2%;
+    width: 40%;
+    padding: 1%;
     display: flex;
-    justify-content: space-around;
     font-size: large;
     font-weight: 900;
-    border: 1px solid black;
+    gap: 100px;
 }

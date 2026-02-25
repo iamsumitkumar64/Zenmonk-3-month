@@ -20,6 +20,14 @@
 .list>ul>li {
     margin-bottom: 1%;
     padding: 5%;
-    background-color: rgb(0, 162, 255);
-    color: white;
+    background-color: white;
+    color: black;
+    border-right: 2px solid black;
+    border-left: 2px solid black;
+    border-top-right-radius: 5%;
+    border-bottom-right-radius: 5%;
+}
+
+.list>ul>li:hover {
+    background-color: rgb(231, 231, 231);
 }
