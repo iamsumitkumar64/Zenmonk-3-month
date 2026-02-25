@@ -48,4 +48,9 @@ export class UserRepository extends Repository<UserEntity> {
         });
         return users;
     }
+
+    async deactivateUserUsingUUID(uuid: string) {
+        const user = await this.update({ uuid: uuid }, { is_active: false });
+        return user.affected;
+    }
 }

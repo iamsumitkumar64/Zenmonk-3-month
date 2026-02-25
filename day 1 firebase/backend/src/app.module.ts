@@ -16,6 +16,7 @@ import { GoogleController } from './features/Auth/google/google.controller.';
 import { BcryptService } from './infrastructure/services/bcrypt.service';
 import { AllActiveUserModule } from './features/users/active-users-list/active-user.module';
 import { AllActiveUserController } from './features/users/active-users-list/active-user.controller';
+import { DeactivateUserModule } from './features/users/deactivate user/deactive.user.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { AllActiveUserController } from './features/users/active-users-list/acti
     RegisterModule,
     LoginModule,
     AllActiveUserModule,
+    DeactivateUserModule,
   ],
   controllers: [AppController, GoogleController],
   providers: [AppService, AuthService, BcryptService, UserRepository, GoogleStrategy],

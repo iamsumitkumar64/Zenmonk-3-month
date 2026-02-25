@@ -15,7 +15,7 @@ export class LoginService {
     async loginUser(body: LoginDto) {
         //check if already exists using this email
         const isUserExists = await this.userRepo.findByEmail(body.email);
-        if (!isUserExists) {
+        if (!isUserExists.length) {
             return { message: "User not Exists with this Email" }
         }
 

@@ -17,6 +17,14 @@ export default function ActiveUsersComp() {
         fetchData();
     }, []);
 
+    const handleDeactivate = async (uuid: string) => {
+        const token = localStorage.getItem("token");
+        await ApiCallService(`${process.env.NEXT_PUBLIC_BACKEND_URL}/deactivate/user/${uuid}`, 'GET', token || '', null);
+        if (activeUsers?.length) {
+            setActiveUsers(prevUsers => prevUsers.filter(user => user.uuid !== uuid));
+        }
+    }
+
     return (
         <>
             {activeUsers && activeUsers.map((user: ActiveUserList) => {
@@ -24,6 +32,7 @@ export default function ActiveUsersComp() {
                     <div key={user.uuid} className="list">
                         <span>{user.username}</span>
                         <span>{user.email}</span>
+                        <button onClick={() => handleDeactivate(user.uuid)}>Deactivate User</button>
                     </div>
                 )
             })}
