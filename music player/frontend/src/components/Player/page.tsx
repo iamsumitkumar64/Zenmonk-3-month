@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { timeConversionUtil } from '@/utils/time.conversion';
 
 export default function PlayerComp() {
-    const { audioUrl, nextTrack, prevTrack, setAudioUrl } = useAudioPlayer();
+    const { audioUrl,audioList, setAudioUrl } = useAudioPlayer();
     const [img, setImg] = useState<string>('');
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
     const audioRef = useRef<HTMLAudioElement>(null);
@@ -27,7 +27,6 @@ export default function PlayerComp() {
 
     const togglePlay = () => {
         if (!audioRef.current) return;
-        console.log(audioRef);
         setcurrentTime(timeConversionUtil(audioRef.current.currentTime));
         setduration(timeConversionUtil(audioRef.current.duration));
         if (isPlaying) {
@@ -43,8 +42,21 @@ export default function PlayerComp() {
         return "Select Song First";
     }
 
-    const changeAudio = (url: string | null) => {
-        setAudioUrl(url);
+    const changeAudio = (direction: number) => {
+        const currIndex=audioList.indexOf(audioUrl);
+        if(direction==1){
+            if(currIndex==0){
+                setAudioUrl(audioList[audioList.length-1]);
+            }else{
+                setAudioUrl(audioList[currIndex-1]);
+            }
+        } else{
+            if(currIndex==audioList.length-1){
+                setAudioUrl(audioList[0]);
+            }else{
+                setAudioUrl(audioList[currIndex+1]);
+            }
+        }
     }
 
     return (
@@ -58,7 +70,7 @@ export default function PlayerComp() {
                     <p>{duration}</p>
                 </div>
                 <div className="controls">
-                    <button onClick={() => changeAudio(prevTrack)} className='.specificButton'>
+                    <button onClick={() => changeAudio(1)} className='.specificButton'>
                         <Image
                             src="/prev_track.png"
                             width={500}
@@ -79,7 +91,7 @@ export default function PlayerComp() {
                             alt="Picture of the author"
                         />}
                     </button>
-                    <button onClick={() => changeAudio(nextTrack)} className='.specificButton'>
+                    <button onClick={() => changeAudio(2)} className='.specificButton'>
                         <Image
                             src="/next_track.png"
                             width={500}

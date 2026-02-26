@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+* {
+  scrollbar-width: none;
+  transition: all ease .5s;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+p,
+h2,
+img {
+  cursor: pointer;
+}
+
+p:hover,
+h1:hover {
+  filter: invert(100%) sepia(100%) saturate(10000%) hue-rotate(180deg);
+}
+
+img {
+  width: auto;
+  height: auto;
+}

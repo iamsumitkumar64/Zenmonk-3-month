@@ -8,7 +8,7 @@ export default function AudioListsComp() {
     const [audioFiles, setAudioFiles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { setAudioUrl, setNextTrack, setPrevTrack } = useAudioPlayer();
+    const { setAudioUrl, setAudioList } = useAudioPlayer();
     const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
@@ -20,6 +20,7 @@ export default function AudioListsComp() {
                 }
                 const data = await response.json();
                 setAudioFiles(data.files);
+                setAudioList(data.files)
                 setAudioUrl(data?.files[0] || null);
                 enqueueSnackbar("Audio Fetched Success", { variant: "success" });
             } catch (err: any) {
@@ -38,8 +39,6 @@ export default function AudioListsComp() {
 
     const handleAudioSpecify = (index: number) => {
         setAudioUrl(audioFiles[index] || null);
-        setNextTrack(audioFiles[index + 1] || null);
-        setPrevTrack(audioFiles[index - 1] || null);
     }
 
     return (
