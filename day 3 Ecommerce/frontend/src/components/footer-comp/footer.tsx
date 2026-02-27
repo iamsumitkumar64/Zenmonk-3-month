@@ -31,9 +31,9 @@ export default function FooterComp() {
                 </div>
                 <div>
                     <h2>EXPERIENCE MYNTRA APP ON MOBILE</h2>
-                    <div>
-                        <Image src="/footer-resource/app-store-icon.png" width={150} height={150} alt="Profile" />
-                        <Image src="/footer-resource/play-store-icon.png" width={150} height={150} alt="Profile" />
+                    <div className='img'>
+                        <Image src="/footer-resource/app-store-icon.png" width={100} height={100} alt="Profile" />
+                        <Image src="/footer-resource/play-store-icon.png" width={100} height={100} alt="Profile" />
                     </div>
                 </div>
                 <div>

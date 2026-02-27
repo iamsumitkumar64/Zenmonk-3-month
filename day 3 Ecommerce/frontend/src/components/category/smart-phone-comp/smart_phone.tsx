@@ -22,7 +22,7 @@ export default function SmartPhoneComp() {
             <div className='product-list'>
                 {Array.isArray(productsList) && productsList.map((product, index) => (
                     <div key={index}>
-                        <Image src={product.thumbnail} width={300} height={300} alt={`Slider ${product.title}`} />
+                        <Image src={product.thumbnail} width={100} height={100} alt={`Slider ${product.title}`} />
                         <p className='title'>{product.title}</p>
                         <p className='description'>{product.description}</p>
                         <button className='buy-button'>bUY</button>

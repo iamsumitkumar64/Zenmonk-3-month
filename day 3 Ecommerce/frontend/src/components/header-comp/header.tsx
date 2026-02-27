@@ -16,7 +16,7 @@ export default function HeaderComp() {
                     <p>KIDS</p>
                     <p>HOME</p>
                     <p>BEAUTY</p>
-                    <p>STUDIO</p>
+                    <p>STUDIO <b>New</b></p>
                 </nav>
             </div>
 
