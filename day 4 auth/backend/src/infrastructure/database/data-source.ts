@@ -6,11 +6,11 @@ import { UserEntity } from "src/entities/user.entity";
 
 const options: DataSourceOptions = {
     type: 'postgres',
-    host: '127.0.0.1',
+    host: 'localhost',
     port: 5432, //5433
-    username: "postgres",
+    username: "123",
     password: "123", //sumit123
-    database: "day1",
+    database: "123",
     entities: [UserEntity],
     synchronize: false,
     migrations: ['dist/infrastructure/database/migrations/*{.ts,.js}'],

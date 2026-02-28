@@ -1,0 +1,28 @@
+name: sumitpg
+
+services:
+  database:
+    image: postgres:18.3-alpine3.23
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      - POSTGRES_USER=123
+      - POSTGRES_PASSWORD=123 
+    volumes:
+      - pg_data:/var/lib/postgresql/docker # database
+
+  pg_admin:
+    image: dpage/pgadmin4
+    ports:
+      - "8888:80"
+    restart: always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=123@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=123
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin # graphical database
+
+volumes:
+  pgadmin_data: {}
+  pg_data: {}
