@@ -45,7 +45,7 @@ export class FileUploadService {
         return {
             message: `${type} uploaded successfully`,
             files: files.map((f) => ({
-                path: path.resolve(f.path)
+                path: `${process.env.SELF_URL}/uploads/${f.filename}`,
             })),
         };
     }
