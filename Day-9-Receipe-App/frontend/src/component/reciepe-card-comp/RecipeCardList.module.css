@@ -8,12 +8,11 @@
 }
 
 .card {
-    width: 300px;
-    height: 420px;
+    width: 32%;
     display: flex;
     flex-direction: column;
-    border-radius: 16px;
-    overflow: hidden;
+    border-radius: 5%;
+    overflow: scroll;
     background: #ffffff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -31,22 +30,22 @@
 }
 
 .image {
+    width: 100%;
+    height: auto;
     object-fit: cover;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
 }
 
 .content {
-    flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 16px;
-    gap: 10px;
+    gap: 4%;
+    padding: 5%;
 }
 
 .steps {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    overflow: hidden;
+    gap: 3%;
+    max-height: 40%;
+    overflow-y: auto;
 }

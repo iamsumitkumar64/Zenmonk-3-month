@@ -35,8 +35,8 @@ function RecipeCard({ recipe }: { recipe: Recipe }) {
                     <Image
                         src={recipe.images[0].img}
                         alt={recipe.recipe_name}
-                        fill
-                        sizes="300px"
+                        width={500}
+                        height={300}
                         className={styles.image}
                     />
                 </Box>
