@@ -40,7 +40,6 @@ export default class UploadController {
         }),
     )
     async uploadVideo(@UploadedFiles() files: Express.Multer.File[]) {
-        console.log(files)
         const storedFiles = this.fileUploadService.handleUpload(files, 'video', 2);
         const image_urls = storedFiles.files;
         return {
