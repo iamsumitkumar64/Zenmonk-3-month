@@ -1,16 +1,19 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CartMigration1773384431652 implements MigrationInterface {
-    name = "CartMigration1773384431652"
+export class OrderItemMigration1773384431660 implements MigrationInterface {
+    name = "OrderItemMigration1773384431660"
 
     public async up(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query(`CREATE TYPE "order_order_status_enum" AS ENUM('INPROCESS','ACCEPETED','REJECTED')`);
+        await queryRunner.query(`CREATE TYPE "order_order_stage_enum" AS ENUM('INPROCESS','INWAY','DELIVERED')`);
+
         await queryRunner.createTable(
             new Table({
-                name: "cart",
+                name: "order",
                 columns: [
                     { name: "uuid", type: "uuid", isPrimary: true, isGenerated: true, generationStrategy: "uuid", default: "uuid_generate_v4()" },
-                    { name: "user_uuid", type: "uuid" },
-                    { name: "product_id", type: "uuid" },
+                    { name: "order_id", type: "uuid" },
+                    { name: "price", type: "int" },
                     { name: "quantity", type: "int" },
                     { name: "created_at", type: "timestamp", default: "now()" },
                     { name: "updated_at", type: "timestamp", default: "now()" },
@@ -22,6 +25,8 @@ export class CartMigration1773384431652 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("cart", true);
+        await queryRunner.dropTable("order", true);
+        await queryRunner.query(`DROP TYPE "order_order_stage_enum"`);
+        await queryRunner.query(`DROP TYPE "order_order_status_enum"`);
     }
 }

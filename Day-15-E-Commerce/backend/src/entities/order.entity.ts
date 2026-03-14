@@ -9,11 +9,11 @@ export class OrderEntity {
     @Column({ type: "uuid" })
     user_uuid: string;
 
-    @Column({ type: "varchar" })
+    @Column({ type: "uuid" })
     product_id: string;
 
     @Column({ type: "int" })
-    quantity: number;
+    total_price: number;
 
     @Column({ type: "varchar" })
     address: string;

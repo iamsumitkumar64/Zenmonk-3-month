@@ -13,8 +13,8 @@ export class OrderMigration1773384431653 implements MigrationInterface {
                 columns: [
                     { name: "uuid", type: "uuid", isPrimary: true, isGenerated: true, generationStrategy: "uuid", default: "uuid_generate_v4()" },
                     { name: "user_uuid", type: "uuid" },
-                    { name: "product_id", type: "varchar" },
-                    { name: "quantity", type: "int" },
+                    { name: "product_id", type: "uuid" },
+                    { name: "total_price", type: "int" },
                     { name: "address", type: "varchar" },
                     { name: "order_status", type: "order_order_status_enum", default: "'INPROCESS'" },
                     { name: "order_stage", type: "order_order_stage_enum", default: "'INPROCESS'" },
