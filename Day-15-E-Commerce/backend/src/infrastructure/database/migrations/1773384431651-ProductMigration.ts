@@ -13,6 +13,7 @@ export class ProductMigration1773384431651 implements MigrationInterface {
                     { name: "product_name", type: "varchar" },
                     { name: "stock_quantity", type: "int" },
                     { name: "product_img", type: "varchar" },
+                    { name: "price", type: "int" },
                     { name: "is_admin_approved", type: "boolean", default: "false" },
                     { name: "created_at", type: "timestamp", default: "now()" },
                     { name: "updated_at", type: "timestamp", default: "now()" },

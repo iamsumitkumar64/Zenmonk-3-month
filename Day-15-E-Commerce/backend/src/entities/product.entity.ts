@@ -17,6 +17,9 @@ export class ProductEntity {
     @Column({ type: "varchar" })
     product_img: string;
 
+    @Column({ type: "int" })
+    price: number;
+
     @Column({ type: "boolean", default: false })
     is_admin_approved: boolean;
 
