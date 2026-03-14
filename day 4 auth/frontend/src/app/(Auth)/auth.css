@@ -1,0 +1,74 @@
+form {
+    width: 30%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 35%;
+    margin-top: 5%;
+    background-image: linear-gradient(to bottom, rgb(0, 132, 255) 5%, rgb(0, 95, 139) 90%);
+    border-radius: 3%;
+    gap: 10%;
+    padding: 0% 5%;
+    color: white;
+    overflow: scroll;
+}
+
+form>.heading-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2%;
+    box-shadow: 0 0 10px 1px rgb(255, 255, 255);
+    border-radius: 500px;
+    padding: 4% 10%;
+    text-align: center;
+}
+
+form>.heading-section>.title {
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-weight: 900;
+    padding: 2%;
+}
+
+form>.heading-section>.description {
+    text-align: center;
+    color: rgb(238, 255, 0);
+    font-weight: 700;
+}
+
+form>.body-section {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+form>.body-section>.fields-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 5%;
+    text-align: center;
+}
+
+form>.body-section>.button-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 10%;
+}
+
+form>.body-section>.button-section>button {
+    padding: 3%;
+    color: white;
+    font-weight: 900;
+    letter-spacing: 5px;
+}
+
+.redirection {
+    text-align: center;
+}
+
+form>.body-section>.button-section>.remeber-me {
+    cursor: grab;
+}

@@ -1,0 +1,127 @@
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(160deg, #020617, #3f3f3f, #020617);
+    color: rgb(255, 255, 255);
+}
+
+.header {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2%;
+}
+
+.title {
+    color: white;
+    font-weight: 900;
+}
+
+.lgtbtn {
+    background-color: rgb(87, 87, 87);
+    color: white;
+    font-weight: 900;
+    border-radius: 16px;
+    padding: .5%;
+    transition: all ease .5s;
+}
+
+.lgtbtn:hover {
+    transform: translateY(-5px);
+    background-color: white;
+    color: black;
+}
+
+.form {
+    width: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 32px;
+    border-radius: 10px;
+    background: #ffffff;
+    color: rgb(0, 0, 0);
+    overflow: scroll;
+    padding-bottom: 100px;
+}
+
+.sectionTitle {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    gap: 16px;
+}
+
+.input {
+    flex: 1;
+}
+
+.fullInput {
+    width: 100%;
+}
+
+.block {
+    width: 100%;
+    padding: 20px;
+    border-radius: 8px;
+    /* background: linear-gradient(160deg, #ffffff, #3f3f3f, #ffffff); */
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.submitBox {
+    padding: 1%;
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    font-weight: 800;
+    display: flex;
+    gap: 7%;
+}
+
+.submitBox button,
+.fromAddbtn,
+.formRemovetn {
+    padding: 4%;
+    border-radius: 100px;
+    font-weight: 800;
+    background-color: #3f3f3f;
+    color: white;
+}
+
+.modal {
+    width: 50%;
+    height: 100%;
+}
+
+.modalBox {
+    width: 100%;
+    height: 100%;
+    margin-left: 50%;
+}
+
+.formRemovetn {
+    width: fit-content;
+    padding: .5%;
+    background-color: #d60000;
+}
+
+.fromAddbtn {
+    padding: .5%;
+    background-color: #0064d6;
+}

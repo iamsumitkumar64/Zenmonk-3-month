@@ -1,0 +1,66 @@
+.modal_container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 60%;
+    /* background-color: #a0a0a0; */
+    border-radius: 2%;
+    box-shadow: 0 10% 30% rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 5%;
+    /* padding: 5%; */
+    border: 1px solid grey;
+    overflow: scroll;
+    backdrop-filter: blur(100px);
+}
+
+.resume_card {
+    width: 40%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 0.2rem solid #f0f0f0;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+    border-radius: 16px;
+    gap: 10%;
+}
+
+.resume_card:hover {
+    transform: scale(1.05);
+    border-color: #baddff;
+}
+
+.resume_card img {
+    width: 90%;
+    height: 70%;
+}
+
+.resume_card_button_box {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.resume_card button {
+    background-color: white;
+    color: black;
+    font-weight: 900;
+    border-radius: 16px;
+    padding: 2% 4%;
+    transition: all ease .5s;
+}
+
+.resume_card button:hover {
+    background-color: rgb(87, 87, 87);
+    color: white;
+    transform: translateY(-5px);
+}
