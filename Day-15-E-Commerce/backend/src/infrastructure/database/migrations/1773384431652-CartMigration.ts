@@ -12,6 +12,7 @@ export class CartMigration1773384431652 implements MigrationInterface {
                     { name: "user_uuid", type: "uuid" },
                     { name: "product_id", type: "uuid" },
                     { name: "quantity", type: "int" },
+                    { name: "is_active", type: "boolean", default: "true" },
                     { name: "created_at", type: "timestamp", default: "now()" },
                     { name: "updated_at", type: "timestamp", default: "now()" },
                     { name: "deleted_at", type: "timestamp", isNullable: true },

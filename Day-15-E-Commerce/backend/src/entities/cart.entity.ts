@@ -14,6 +14,9 @@ export class CartEntity {
     @Column({ type: "int" })
     quantity: number;
 
+    @Column({ type: "boolean", default: true })
+    is_active: boolean;
+
     @CreateDateColumn()
     created_at: Date;
 

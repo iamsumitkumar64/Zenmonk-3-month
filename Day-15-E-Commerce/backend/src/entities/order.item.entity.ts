@@ -1,12 +1,15 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('order_item')
-export class ProductEntity {
+export class OrderItemEntity {
     @PrimaryGeneratedColumn("uuid")
     uuid: string;
 
     @Column({ type: "uuid" })
     order_id: string;
+
+    @Column({ type: "uuid" })
+    product_id: string;
 
     @Column({ type: "int" })
     price: number;

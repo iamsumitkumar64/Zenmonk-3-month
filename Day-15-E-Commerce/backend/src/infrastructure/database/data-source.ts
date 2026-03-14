@@ -12,7 +12,7 @@ const options: DataSourceOptions = {
     host: '127.0.0.1',
     port: 5432, //5433
     username: "postgres",
-    password: "123", //sumit123
+    password: "sumit123", //sumit123
     database: "Big-Ecommerce",
     entities: [UserEntity, ProductEntity, CartEntity, OrderEntity],
     synchronize: false,
