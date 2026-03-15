@@ -101,4 +101,18 @@ export class CustomerService {
             throw error;
         }
     }
+
+    async getOrders(user: UserEntity, offset?: number, limit?: number) {
+        try {
+            const product = await this.orderRepo.getOrderProducts(user.uuid, offset, limit);
+            return {
+                data: product,
+                message: "Order Product Listing Success"
+            }
+        }
+        catch (error) {
+            console.error("Get Order Product Listing Error:", error);
+            throw error;
+        }
+    }
 }

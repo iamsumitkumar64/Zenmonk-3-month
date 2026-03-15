@@ -69,4 +69,15 @@ export class CustomerController {
             throw error;
         }
     }
+
+    @Get('/order')
+    async getOrders(@Req() req: Request, @Query('offset') offset?: number, @Query('limit') limit?: number) {
+        try {
+            return this.customerService.getOrders(req.user, offset, limit);
+        }
+        catch (error) {
+            console.error("Get orders Customer Error:", error);
+            throw error;
+        }
+    }
 }
