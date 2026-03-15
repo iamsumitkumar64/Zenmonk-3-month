@@ -1,10 +1,10 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 
 export class OrderMigration1773384431653 implements MigrationInterface {
     name = "OrderMigration1773384431653"
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`CREATE TYPE "order_order_status_enum" AS ENUM('INPROCESS','ACCEPETED','REJECTED')`);
+        await queryRunner.query(`CREATE TYPE "order_order_status_enum" AS ENUM('INPROCESS','ACCEPTED','REJECTED')`);
         await queryRunner.query(`CREATE TYPE "order_order_stage_enum" AS ENUM('INPROCESS','INWAY','DELIVERED')`);
 
         await queryRunner.createTable(
@@ -25,10 +25,22 @@ export class OrderMigration1773384431653 implements MigrationInterface {
             }),
             true
         );
+
+        await queryRunner.createForeignKey(
+            "order",
+            new TableForeignKey({
+                name: "FK_order_user",
+                columnNames: ["user_uuid"],
+                referencedTableName: "users",
+                referencedColumnNames: ["uuid"],
+                onDelete: "CASCADE",
+            }),
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("order", true);
+        await queryRunner.dropForeignKey("order", "FK_order_user");
+        await queryRunner.dropTable("order");
         await queryRunner.query(`DROP TYPE "order_order_stage_enum"`);
         await queryRunner.query(`DROP TYPE "order_order_status_enum"`);
     }

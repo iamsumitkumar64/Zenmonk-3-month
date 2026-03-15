@@ -1,4 +1,6 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { UserEntity } from "./user.entity";
+import { ProductEntity } from "./product.entity";
 
 @Entity('cart')
 export class CartEntity {
@@ -16,6 +18,14 @@ export class CartEntity {
 
     @Column({ type: "boolean", default: true })
     is_active: boolean;
+
+    @ManyToOne(() => UserEntity, user => user.cart)
+    @JoinColumn({ name: "user_uuid" })
+    user: UserEntity;
+
+    @ManyToOne(() => ProductEntity, product => product.cart)
+    @JoinColumn({ name: "product_id" })
+    product: ProductEntity;
 
     @CreateDateColumn()
     created_at: Date;

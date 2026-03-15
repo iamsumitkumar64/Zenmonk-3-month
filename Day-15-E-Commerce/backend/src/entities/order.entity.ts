@@ -1,5 +1,7 @@
 import { ORDER_STAGE, ORDER_STATUS } from "src/enums/order";
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { OrderItemEntity } from "./order.item.entity";
+import { UserEntity } from "./user.entity";
 
 @Entity('order')
 export class OrderEntity {
@@ -31,6 +33,13 @@ export class OrderEntity {
         default: ORDER_STAGE.ONBOARD,
     })
     order_stage: ORDER_STAGE;
+
+    @OneToMany(() => OrderItemEntity, item => item.order)
+    items: OrderItemEntity[];
+
+    @ManyToOne(() => UserEntity, user => user.orders)
+    @JoinColumn({ name: "user_uuid" })
+    user: UserEntity;
 
     @CreateDateColumn()
     created_at: Date;

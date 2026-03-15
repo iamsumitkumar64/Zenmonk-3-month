@@ -1,4 +1,6 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { OrderEntity } from "./order.entity";
+import { ProductEntity } from "./product.entity";
 
 @Entity('order_item')
 export class OrderItemEntity {
@@ -16,6 +18,14 @@ export class OrderItemEntity {
 
     @Column({ type: "int" })
     quantity: number;
+
+    @ManyToOne(() => OrderEntity, order => order.items)
+    @JoinColumn({ name: "order_id" })
+    order: OrderEntity;
+
+    @ManyToOne(() => ProductEntity, product => product.order_items)
+    @JoinColumn({ name: "product_id" })
+    product: ProductEntity;
 
     @CreateDateColumn()
     created_at: Date;
