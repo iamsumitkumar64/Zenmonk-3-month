@@ -19,7 +19,7 @@ export class ProductRepository extends Repository<ProductEntity> {
         return await this.find({
             where: {
                 seller_uuid: seller_id,
-                product_name: product_name
+                product_name: product_name,
             },
             select: {
                 uuid: true,
