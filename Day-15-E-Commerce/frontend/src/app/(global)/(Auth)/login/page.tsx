@@ -18,7 +18,7 @@ import {
 
 import { loginSchema, LoginSchemaType } from "@/types/login"
 import { loginUser } from "@/redux/feature/Auth/authAction"
-import { Role } from "../role.enum"
+import { RoleEnum } from "../../../../enums/role.enum"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks.ts"
 import { RootState } from "@/redux/store"
 import { useErrorHandler } from "@/utils/error"
@@ -36,11 +36,11 @@ export default function LoginForm() {
         formState: { errors }
     } = useForm<LoginSchemaType>({
         resolver: zodResolver(loginSchema),
-        defaultValues: {
-            role: Role.USER
-        }
+        // defaultValues: {
+        //     role: RoleEnum.USER
+        // }
     })
-    const role = watch("role")
+    // const role = watch("role")
 
     const onSubmit = async (data: LoginSchemaType) => {
         try {
@@ -60,7 +60,7 @@ export default function LoginForm() {
                 </Typography>
 
                 <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-                    <Box className={styles.field}>
+                    {/* <Box className={styles.field}>
                         <InputLabel sx={{ color: "white", fontSize: ".8rem" }}>
                             Select Role
                         </InputLabel>
@@ -73,14 +73,13 @@ export default function LoginForm() {
                                 if (value) setValue("role", value)
                             }}
                         >
-                            <ToggleButton value={Role.USER}>User</ToggleButton>
-                            <ToggleButton value={Role.SELLER}>Seller</ToggleButton>
-                            <ToggleButton value={Role.ADMIN}>Admin</ToggleButton>
+                            <ToggleButton value={RoleEnum.USER}>User</ToggleButton>
+                            <ToggleButton value={RoleEnum.SELLER}>Seller</ToggleButton>
                         </ToggleButtonGroup>
-                    </Box>
+                    </Box> */}
 
                     <Box className={styles.field}>
-                        <InputLabel sx={{ color: "white", fontSize: ".8rem" }}>
+                        <InputLabel >
                             Email
                         </InputLabel>
 
@@ -88,9 +87,9 @@ export default function LoginForm() {
                             type="email"
                             fullWidth
                             {...register("email")}
-                            slotProps={{
-                                input: { sx: { height: "40px", color: "white" } }
-                            }}
+                        // slotProps={{
+                        //     input: { sx: { height: "40px", color: "white" } }
+                        // }}
                         />
 
                         {errors.email && (
@@ -99,7 +98,7 @@ export default function LoginForm() {
                     </Box>
 
                     <Box className={styles.field}>
-                        <InputLabel sx={{ color: "white", fontSize: ".8rem" }}>
+                        <InputLabel >
                             Password
                         </InputLabel>
 
@@ -107,9 +106,9 @@ export default function LoginForm() {
                             type="password"
                             fullWidth
                             {...register("password")}
-                            slotProps={{
-                                input: { sx: { height: "40px", color: "white" } }
-                            }}
+                        // slotProps={{
+                        //     input: { sx: { height: "40px", color: "white" } }
+                        // }}
                         />
 
                         {errors.password && (

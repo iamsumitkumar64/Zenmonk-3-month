@@ -1,12 +1,13 @@
-export interface User {
+export interface UserType {
   uid: string
   email: string
   name: string
   role: string
+  address: any
 }
 
 export interface AuthState {
-  user: User | null
+  user: UserType | null
   token: string | null
   loading: boolean
   error: string | null
@@ -16,7 +17,7 @@ export interface AuthState {
 export interface LoginPayload {
   email: string
   password: string
-  role: string
+  // role: string
 }
 
 export interface SignupPayload {

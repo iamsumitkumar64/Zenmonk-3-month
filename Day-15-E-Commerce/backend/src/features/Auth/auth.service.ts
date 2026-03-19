@@ -44,7 +44,7 @@ export class AuthService {
             //check if already exists using this email
             const isUserExists = await this.userRepo.findByEmail(body.email);
             if (!isUserExists.length) {
-                throw new BadRequestException('User not Exists with this Email');
+                throw new BadRequestException('User not Exists with this Email ');
             }
 
             const isValid = await this.bcryptService.verifyPassword(body.password, isUserExists[0].password);

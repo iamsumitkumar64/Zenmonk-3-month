@@ -5,16 +5,29 @@ import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import storage from "redux-persist/lib/storage";
 import authReducer from "../feature/Auth/authSlice";
 import globalProductsReducer from "../feature/Global_Products/globalProductSlice";
+import SellerReducer from "../feature/Seller/sellerSlice";
+import UserCommerceReducer from "../feature/User/userSlice";
 
 const persistConfig = {
     key: "root",
     storage,
+    blacklisted: [globalProductsReducer]
 };
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
     authReducer: authReducer,
     globalProductsReducer: globalProductsReducer,
+    SellerReducer: SellerReducer,
+    UserCommerceReducer: UserCommerceReducer
 });
+
+const rootReducer = (state: any, action: any) => {
+    if (action.type.includes("auth/logout/fulfilled")) {
+        storage.removeItem("persist:root");
+        state = undefined;
+    }
+    return appReducer(state, action);
+};
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

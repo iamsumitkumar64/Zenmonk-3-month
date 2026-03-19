@@ -4,12 +4,18 @@ import { Box, Button, Menu, MenuItem, Typography } from "@mui/material"
 import { logoutUser } from '@/redux/feature/Auth/authAction';
 import './header-comp.css'
 import { useState } from "react";
-import HomeFilledIcon from '@mui/icons-material/HomeFilled';
-import SearchMusicComp from '../search-comp/search_comp';
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
-import Image from 'next/image';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import SearchProductComp from '../search-comp/search_comp';
+import LocalAirportIcon from '@mui/icons-material/LocalAirport';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks.ts';
 import { RootState } from '@/redux/store';
+import { logoutItemSx, menuButtonSx, menuItemSx, menuPaperSx } from './header.styles';
+import { clearProducts } from '@/redux/feature/Global_Products/globalProductSlice';
+import TabComps from '../tab-comp/tab-comp';
+import Image from 'next/image';
 
 export default function HeaderComp() {
     const pathname = usePathname();
@@ -17,11 +23,14 @@ export default function HeaderComp() {
     const dispatch = useAppDispatch();
     const { user, error, loading, status } = useAppSelector((state: RootState) => state.authReducer);
 
+
+
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 
     const handleLogOut = async () => {
         await dispatch(logoutUser()).unwrap();
+        dispatch(clearProducts())
         localStorage.clear();
         router.replace("/login")
     }
@@ -36,132 +45,169 @@ export default function HeaderComp() {
 
     return (
         <Box className="header">
-            <Box className="left-container">
-                <Image
-                    src={'/logo.png'}
-                    className='logo'
-                    alt='logo img'
-                    width={40}
-                    height={40}
-                    onClick={() => router.replace('/')}
-                />
-            </Box>
-
-            <Box className="right-container">
-                <Box className="searchContainer" >
-                    <HomeFilledIcon fontSize='large' className='homeIcon' onClick={() => router.replace('/')} />
-                    <SearchMusicComp />
-                </Box>
-
-                <Box className="optionBox">
-                    <Box className="optionlist">
-                        <Typography className='option'>Premium </Typography>
-                        <Typography className='option'>Support </Typography>
-                        <Typography className='option'>Download </Typography>
+            <Box className="header-align">
+                <Box className="top-box">
+                    <Box className="top-left">
+                        <Box className="top-left-fbox">
+                            <Image src="/logo.webp" width={100} height={100} alt="poster" />
+                            Flipkart
+                        </Box>
+                        <Box className="top-left-sbox">
+                            {/* <LocalAirportIcon /> */}
+                            <Image src="/aeroplane.webp" width={100} height={100} alt="poster" />
+                            Travel
+                        </Box>
                     </Box>
-                    <Box className="optionlist">
-                        <Typography className='option'>Install App <FileDownloadIcon /></Typography>
-                        <Typography className='option'>Sign Up </Typography>
+                    <Box className="top-right">
+                        <LocationOnIcon />
+                        Location not set <Typography>Select delivery location <KeyboardArrowDownIcon /></Typography>
                     </Box>
                 </Box>
 
-                <Button
-                    variant="outlined"
-                    sx={{ width: "10%", height: "10%", color: "black", backgroundColor: "white", fontWeight: "700", fontSize: "1rem", borderRadius: "16px" }}
-                    onClick={handleMenuOpen}
-                >
-                    Menu
-                </Button>
+                <Box className="middle-box">
+                    <Box className="middle-left">
+                        <SearchProductComp />
+                    </Box>
 
-                <Menu
-                    anchorEl={anchorEl}
-                    open={open}
-                    onClose={handleMenuClose}
-                    slotProps={{
-                        paper: {
-                            sx: {
-                                width: "10%",
-                                backgroundColor: "rgb(29, 29, 29)",
-                                color: "rgba(255, 255, 255, 0.98)",
-                                fontWeight: "900",
-                                borderRadius: "20px",
-                                textAlign: "center",
-                            }
-                        }
-                    }}
-                >
-                    <MenuItem
-                        onClick={() => {
-                            router.push('/');
-                            handleMenuClose();
-                        }}
-                        sx={{
-                            fontWeight: "700",
-                            border: "2px solid transparent",
-                            borderRadius: "20px",
-                            '&:hover': {
-                                border: "2px solid white"
-                            },
-                        }}
-                    >
-                        Home
-                    </MenuItem>
+                    <Box className="middle-right">
+                        <Box className="middle-right-spaces">
+                            <AccountCircleIcon />
+                            Login
+                            <KeyboardArrowDownIcon />
+                        </Box>
+                        <Box>
+                            <Button
+                                variant="outlined"
+                                sx={menuButtonSx}
+                                onClick={handleMenuOpen}
+                            >
+                                Menu
+                            </Button>
+                            <KeyboardArrowDownIcon />
+                        </Box>
+                        <Box>
+                            Cart
+                            <ShoppingCartIcon />
+                        </Box>
+                    </Box>
+                </Box>
 
-                    <MenuItem
-                        onClick={() => {
-                            router.push('/profile');
-                            handleMenuClose();
-                        }}
-                        sx={{
-                            fontWeight: "700",
-                            border: "2px solid transparent",
-                            borderRadius: "20px",
-                            '&:hover': {
-                                border: "2px solid white"
-                            },
-                        }}
-                    >
-                        Profile
-                    </MenuItem>
+                <Box className="down-box">
+                    {/* <Box className="searchContainer" >
+                <HomeFilledIcon fontSize='large' className='homeIcon' onClick={() => router.replace('/')} />
+                <SearchProductComp />
+                </Box> */}
 
-                    {user ? (
-                        <MenuItem
-                            sx={{
-                                color: "red",
-                                fontWeight: "700",
-                                border: "2px solid transparent",
-                                borderRadius: "20px",
-                                '&:hover': {
-                                    border: "2px solid white"
-                                },
-                            }}
-                            onClick={async () => {
-                                await handleLogOut();
-                                handleMenuClose();
+                    <Box className="right-container">
+                        <Menu
+                            anchorEl={anchorEl}
+                            open={open}
+                            onClose={handleMenuClose}
+                            slotProps={{
+                                paper: {
+                                    sx: menuPaperSx
+                                }
                             }}
                         >
-                            Log Out
-                        </MenuItem>
-                    ) : (
-                        <MenuItem
-                            onClick={() => {
-                                router.push('/login');
-                                handleMenuClose();
-                            }}
-                            sx={{
-                                fontWeight: "700",
-                                border: "2px solid transparent",
-                                borderRadius: "20px",
-                                '&:hover': {
-                                    border: "2px solid white"
-                                },
-                            }}
-                        >
-                            Sign In
-                        </MenuItem>
-                    )}
-                </Menu>
+                            {user ? [
+                                user.role === 'SELLER' && (
+                                    <MenuItem
+                                        key="add"
+                                        sx={menuItemSx}
+                                        onClick={() => {
+                                            router.push('/seller/product/add_product');
+                                            handleMenuClose();
+                                        }}
+                                    >
+                                        Add Product
+                                    </MenuItem>
+                                ),
+                                user.role === 'SELLER' && (
+                                    <MenuItem
+                                        key="products"
+                                        onClick={() => {
+                                            router.push('/seller/product/products');
+                                            handleMenuClose();
+                                        }}
+                                        sx={menuItemSx}
+                                    >
+                                        My Products
+                                    </MenuItem>
+                                ),
+                                user.role === 'SELLER' && (
+                                    <MenuItem
+                                        key="order"
+                                        onClick={() => {
+                                            router.push('/seller/order');
+                                            handleMenuClose();
+                                        }}
+                                        sx={menuItemSx}
+                                    >
+                                        Orders
+                                    </MenuItem>
+                                ),
+                                user.role === 'USER' && (
+                                    <MenuItem
+                                        key="products"
+                                        onClick={() => {
+                                            router.push(' /user/products');
+                                            handleMenuClose();
+                                        }}
+                                        sx={menuItemSx}
+                                    >
+                                        Products
+                                    </MenuItem>
+                                ),
+                                user.role === 'USER' && (
+                                    <MenuItem
+                                        key="cart"
+                                        onClick={() => {
+                                            router.push(' /user/cart');
+                                            handleMenuClose();
+                                        }}
+                                        sx={menuItemSx}
+                                    >
+                                        Cart
+                                    </MenuItem>
+                                ),
+                                user.role === 'USER' && (
+                                    <MenuItem
+                                        key="order"
+                                        onClick={() => {
+                                            router.push(' /user/order');
+                                            handleMenuClose();
+                                        }}
+                                        sx={menuItemSx}
+                                    >
+                                        Orders
+                                    </MenuItem>
+                                ),
+                                <MenuItem
+                                    key="logout"
+                                    sx={logoutItemSx}
+                                    onClick={async () => {
+                                        await handleLogOut();
+                                        handleMenuClose();
+                                    }}
+                                >
+                                    Log Out
+                                </MenuItem>
+                            ] : (
+                                <MenuItem
+                                    onClick={() => {
+                                        router.push('/login');
+                                        handleMenuClose();
+                                    }}
+                                    sx={menuItemSx}
+                                >
+                                    Sign In
+                                </MenuItem>
+                            )}
+                        </Menu>
+                    </Box>
+                </Box>
             </Box>
+            <TabComps />
         </Box >
     )
 }

@@ -19,7 +19,7 @@ import {
 import { signupSchema, SignupSchemaType } from "@/types/signup"
 
 import { signupUser } from "@/redux/feature/Auth/authAction"
-import { Role } from "../role.enum"
+import { RoleEnum } from "../../../../enums/role.enum"
 import { RootState } from "@/redux/store"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks.ts"
 import { useErrorHandler } from "@/utils/error"
@@ -39,7 +39,7 @@ export default function SignupForm() {
     } = useForm<SignupSchemaType>({
         resolver: zodResolver(signupSchema),
         defaultValues: {
-            role: Role.USER
+            role: RoleEnum.USER
         }
     })
     const role = watch("role")
@@ -69,7 +69,7 @@ export default function SignupForm() {
                 </Typography>
                 <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
                     <Box className={styles.field}>
-                        <InputLabel sx={{ color: "white", fontSize: ".8rem" }}>
+                        <InputLabel>
                             Select Role
                         </InputLabel>
 
@@ -81,23 +81,22 @@ export default function SignupForm() {
                                 if (value) setValue("role", value)
                             }}
                         >
-                            <ToggleButton value={Role.USER}>User</ToggleButton>
-                            <ToggleButton value={Role.SELLER}>Seller</ToggleButton>
-                            <ToggleButton value={Role.ADMIN}>Admin</ToggleButton>
+                            <ToggleButton value={RoleEnum.USER}>User</ToggleButton>
+                            <ToggleButton value={RoleEnum.SELLER}>Seller</ToggleButton>
                         </ToggleButtonGroup>
                     </Box>
 
                     <Box className={styles.field}>
-                        <InputLabel sx={{ color: "white", fontSize: ".8rem" }}>
+                        <InputLabel>
                             Username
                         </InputLabel>
 
                         <TextField
                             fullWidth
                             {...register("username")}
-                            slotProps={{
-                                input: { sx: { height: "40px", color: "white" } }
-                            }}
+                        // slotProps={{
+                        //     input: { sx: { height: "40px", color: "white" } }
+                        // }}
                         />
 
                         {errors.username && (
@@ -107,7 +106,7 @@ export default function SignupForm() {
 
                     {/* EMAIL */}
                     <Box className={styles.field}>
-                        <InputLabel sx={{ color: "white", fontSize: ".8rem" }}>
+                        <InputLabel>
                             Email
                         </InputLabel>
 
@@ -115,9 +114,9 @@ export default function SignupForm() {
                             type="email"
                             fullWidth
                             {...register("email")}
-                            slotProps={{
-                                input: { sx: { height: "40px", color: "white" } }
-                            }}
+                        // slotProps={{
+                        //     input: { sx: { height: "40px", color: "white" } }
+                        // }}
                         />
 
                         {errors.email && (
@@ -126,7 +125,7 @@ export default function SignupForm() {
                     </Box>
 
                     <Box className={styles.field}>
-                        <InputLabel sx={{ color: "white", fontSize: ".8rem" }}>
+                        <InputLabel>
                             Password
                         </InputLabel>
 
@@ -134,9 +133,9 @@ export default function SignupForm() {
                             type="password"
                             fullWidth
                             {...register("password")}
-                            slotProps={{
-                                input: { sx: { height: "40px", color: "white" } }
-                            }}
+                        // slotProps={{
+                        //     input: { sx: { height: "40px", color: "white" } }
+                        // }}
                         />
 
                         {errors.password && (
@@ -145,7 +144,7 @@ export default function SignupForm() {
                     </Box>
 
                     <Box className={styles.field}>
-                        <InputLabel sx={{ color: "white", fontSize: ".8rem" }}>
+                        <InputLabel>
                             Confirm Password
                         </InputLabel>
 
@@ -153,9 +152,9 @@ export default function SignupForm() {
                             type="password"
                             fullWidth
                             {...register("confirmPassword")}
-                            slotProps={{
-                                input: { sx: { height: "40px", color: "white" } }
-                            }}
+                        // slotProps={{
+                        //     input: { sx: { height: "40px", color: "white" } }
+                        // }}
                         />
 
                         {errors.confirmPassword && (
