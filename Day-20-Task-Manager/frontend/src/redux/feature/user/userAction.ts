@@ -114,3 +114,84 @@ export const getTeamsIn = createAsyncThunk<
         }
     }
 )
+
+export const getProjects = createAsyncThunk<
+    any,
+    void,
+    { state: RootState }
+>(
+    "user/getProjects",
+    async (_, { getState, rejectWithValue }) => {
+        try {
+            const token = getState().authReducer.token || ""
+
+            const res = await fetch(`${API_URL}/user/team/project`, {
+                headers: {
+                    Authorization: token
+                }
+            })
+
+            const result = await res.json()
+            if (!res.ok) throw new Error(result.message)
+
+            return result
+        } catch (err: any) {
+            return rejectWithValue(err.message)
+        }
+    }
+)
+
+export const getAllTasks = createAsyncThunk<
+    any,
+    void,
+    { state: RootState }
+>(
+    "user/getAllTasks",
+    async (_, { getState, rejectWithValue }) => {
+        try {
+            const token = getState().authReducer.token || ""
+
+            const res = await fetch(`${API_URL}/user/project/task`, {
+                headers: {
+                    Authorization: token
+                }
+            })
+
+            const result = await res.json()
+            if (!res.ok) throw new Error(result.message)
+
+            return result
+        } catch (err: any) {
+            return rejectWithValue(err.message)
+        }
+    }
+)
+
+export const updateTaskStatus = createAsyncThunk<
+    any,
+    { task_uuid: string; status: string; },
+    { state: RootState }
+>(
+    "user/updateTaskStatus",
+    async (data, { getState, rejectWithValue }) => {
+        try {
+            const token = getState().authReducer.token || ""
+
+            const res = await fetch(`${API_URL}/user/project/task`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: token
+                },
+                body: JSON.stringify(data)
+            })
+
+            const result = await res.json()
+            if (!res.ok) throw new Error(result.message)
+
+            return result
+        } catch (err: any) {
+            return rejectWithValue(err.message)
+        }
+    }
+)

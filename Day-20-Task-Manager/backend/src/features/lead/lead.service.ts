@@ -9,6 +9,9 @@ import { TeamMemberRepository } from "src/infrastructure/repository/team.member.
 import { UserRepository } from "src/infrastructure/repository/user.repo";
 import { ProjectCreateDto } from "./dto/project.create.dto";
 import { ProjectRepository } from "src/infrastructure/repository/project.repo";
+import { TaskCreateDto } from "./dto/task.create.dto";
+import { TaskRepository } from "src/infrastructure/repository/task.repo";
+import { TaskUpdateStatusDto } from "./dto/task.update.dto";
 
 @Injectable()
 export class LeadService {
@@ -18,6 +21,7 @@ export class LeadService {
         private readonly teamMemberRepo: TeamMemberRepository,
         private readonly userRepo: UserRepository,
         private readonly projectRepo: ProjectRepository,
+        private readonly taskRepo: TaskRepository
     ) { }
 
     async CreateTeam(body: TeamCreateDto, user: UserEntity) {
@@ -78,7 +82,7 @@ export class LeadService {
             await this.teamMemberRepo.createTeamMember(request.user_uuid, request.team_uuid);
         }
 
-        await this.teamRequestRepo.changeJoinRequestStatus(body);
+        await this.teamRequestRepo.changeJoinRequestStatus(body.uuid);
 
         return {
             message: "Status changed successfully"
@@ -102,5 +106,39 @@ export class LeadService {
 
     async getProjects(team_uuid: string, user: UserEntity) {
         return await this.projectRepo.getTeamsProjects(team_uuid);
+    }
+
+    async getTeamMembers(team_uuid: string) {
+        return await this.teamMemberRepo.findTeamMembers(team_uuid);
+    }
+
+    async CreateTask(body: TaskCreateDto, user: UserEntity) {
+        const isExists = await this.taskRepo.findTaskBYDetails(body.task_name, body.project_uuid, body.assigned_to);
+        if (isExists) {
+            throw new BadRequestException("Already same name task assigned to assignee");
+        }
+
+        const task = await this.taskRepo.createTask(body);
+
+        return {
+            data: task,
+            message: "Project Task Created Success"
+        };
+    }
+
+    async updateTasks(body: TaskUpdateStatusDto, user: UserEntity) {
+        const isExists = await this.taskRepo.findTaskBYUUID(body.task_uuid);
+        if (!isExists) {
+            throw new BadRequestException("Task not found");
+        }
+
+        await this.taskRepo.updateTaskStatus(body.task_uuid, body.status);
+        return {
+            message: "Project Task status updated Success"
+        };
+    }
+
+    async getAllTasks(user: UserEntity) {
+        return await this.taskRepo.getAllTasks(user.uuid);
     }
 } 

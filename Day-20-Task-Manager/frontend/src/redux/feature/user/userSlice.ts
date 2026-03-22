@@ -1,12 +1,15 @@
 "use client"
 
 import { createSlice } from "@reduxjs/toolkit"
-import { UserState } from "./userType"
+import { Task, TaskStatus, UserState } from "./userType"
 import {
+    getAllTasks,
     getJoinRequests,
+    getProjects,
     getTeams,
     getTeamsIn,
-    joinTeam
+    joinTeam,
+    updateTaskStatus
 } from "./userAction"
 
 const initialState: UserState = {
@@ -60,6 +63,40 @@ const userSlice = createSlice({
             })
             .addCase(getTeamsIn.rejected, (state, action) => {
                 state.loading = false
+                state.error = action.payload as string
+            })
+            .addCase(getProjects.pending, (state) => {
+                state.loading = true
+            })
+            .addCase(getProjects.fulfilled, (state, action) => {
+                state.loading = false
+                state.projects = action.payload.data
+                state.error = null
+            })
+            .addCase(getProjects.rejected, (state, action) => {
+                state.loading = false
+                state.error = action.payload as string
+            })
+            .addCase(getAllTasks.fulfilled, (state, action) => {
+                state.loading = false
+                state.tasks = action.payload.data
+                state.error = null
+            })
+            .addCase(getAllTasks.rejected, (state, action) => {
+                state.loading = false
+                state.error = action.payload as string
+            })
+            .addCase(updateTaskStatus.fulfilled, (state, action) => {
+                const { status, task_uuid } = action.meta.arg;
+
+                const task = state.tasks.find((t) => t.uuid === task_uuid)
+                if (task) {
+                    task.task_status = status as TaskStatus
+                }
+
+                state.error = null
+            })
+            .addCase(updateTaskStatus.rejected, (state, action) => {
                 state.error = action.payload as string
             })
     }
